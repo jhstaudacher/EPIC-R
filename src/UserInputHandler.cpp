@@ -1,13 +1,13 @@
-#include "io/UserInputHandler.h"
+#include "UserInputHandler.h"
 
-#include "index/IndexFactory.h"
-#include "io/DataInput.h"
+#include "IndexFactory.h"
+#include "DataInput.h"
 #include "Logging.h"
 
 #include <getopt.h>
 #include <string>
 
-epic::io::UserInputHandler::UserInputHandler(const std::string& index, const std::vector<longUInt>& weights, longUInt quota, OutputType outputType, bool filterNullPlayers) {
+epic::io::UserInputHandler::UserInputHandler(const std::string& index, const std::vector<longUInt>& weights, longUInt quota, OutputType outputType, bool filterNullPlayers, bool verbose) {
 	mIndex = index;
 	mWeights = weights;
 	mQuota = quota;
@@ -18,6 +18,13 @@ epic::io::UserInputHandler::UserInputHandler(const std::string& index, const std
 	mFilterNullPlayers = filterNullPlayers;
 	mIntRepresentation = DEFAULT;
 	mWeightsFile = "";
+	
+	if (verbose) {
+	  log::out.setLogLevel(log::info);
+	}
+	else {
+	  log::out.setLogLevel(log::error);
+	}
 }
 
 epic::io::UserInputHandler::UserInputHandler() {
@@ -46,7 +53,7 @@ bool epic::io::UserInputHandler::handleWeightsAndQuota(const std::string& fileNa
   			mQuota = static_cast<longUInt>(mFloatQuota);
 		}
 		else {
-			std::cout << "Float quota specified without the --float flag." << std::endl;
+			Rcpp::Rcout << "Float quota specified without the --float flag." << std::endl;
 			return false;
 		}
 		mWeights = DataInput::inputCSV(fileName, mTestFlag);
@@ -93,7 +100,7 @@ bool epic::io::UserInputHandler::handleIndex(char* value) {
 		ret = true;
 	} else {
 		log::out << log::warning << "The --index option needs one of the following arguments:" << log::endl;
-		index::IndexFactory::printIndexList(std::cout);
+		index::IndexFactory::printIndexList(Rcpp::Rcout);
 	}
 
 	return ret;
@@ -187,15 +194,15 @@ bool epic::io::UserInputHandler::parseCommandLine(int numberOfArguments, char* v
 				break;
 
 			case 'h':
-				std::cout << "epic [OPTIONS]" << std::endl
+			  Rcpp::Rcout << "epic [OPTIONS]" << std::endl
 						  << std::endl;
-				std::cout << "required OPTIONS:" << std::endl
+			  Rcpp::Rcout << "required OPTIONS:" << std::endl
 						  << MSG_REQUIRED_OPTS << std::endl;
-				std::cout << "optional OPTIONS:" << std::endl
+			  Rcpp::Rcout << "optional OPTIONS:" << std::endl
 						  << MSG_OPTIONAL_OPTS << std::endl;
-				std::cout << "Index abbreviations:" << std::endl;
-				index::IndexFactory::printIndexList();
-				exit(-1);
+			  Rcpp::Rcout << "Index abbreviations:" << std::endl;
+				index::IndexFactory::printIndexList(Rcpp::Rcout);
+				Rcpp::stop("");
 
 			case OPT_GMP:
 				if (mIntRepresentation == DEFAULT) {

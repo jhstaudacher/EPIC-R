@@ -1,4 +1,4 @@
-#include "lint/BigIntCalculator.h"
+#include "BigIntCalculator.h"
 
 #include "Logging.h"
 
@@ -69,12 +69,6 @@ void epic::lint::BigIntCalculator::assign_one(LargeNumber& dest) {
 
 void epic::lint::BigIntCalculator::to_bigInt(bigInt* dest, const LargeNumber& value) {
 	*dest = *value.bint;
-}
-
-std::string epic::lint::BigIntCalculator::to_string(LargeNumber& val) {
-	std::stringstream sstream;
-	sstream << *val.bint;
-	return sstream.str();
 }
 
 void epic::lint::BigIntCalculator::alloc_largeNumberArray(LargeNumber* array, longUInt number_of_elements) {

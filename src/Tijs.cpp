@@ -1,4 +1,4 @@
-#include "index/Tijs.h"
+#include "Tijs.h"
 
 #include "types.h"
 #include "Logging.h"
@@ -17,7 +17,7 @@ std::vector<epic::bigFloat> epic::index::Tijs::calculate() {
 	if (n_vp == 0) {
 		throw std::invalid_argument("Tijs index not defined: There are no veto players.");
 	} else {
-		log::out << log::info << "Total number of veto players: " << n_vp << log::endl;
+		log::out << log::info << "Total number of veto players: " << GMPHelper::mpf_class_to_string(n_vp) << log::endl;
 
 		for (longUInt i = 0; i < mGame.getNumberOfPlayers(); ++i) {
 			if (mGame.getVetoPlayerVector()[i]) {

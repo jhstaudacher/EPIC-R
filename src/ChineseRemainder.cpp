@@ -1,4 +1,4 @@
-#include "lint/ChineseRemainder.h"
+#include "ChineseRemainder.h"
 
 #include "Logging.h"
 #include <sstream>
@@ -160,16 +160,6 @@ void epic::lint::ChineseRemainder::to_bigInt(bigInt* dest, const LargeNumber& va
 	}
 
 	*dest %= mM;
-}
-
-std::string epic::lint::ChineseRemainder::to_string(LargeNumber& val) {
-	bigInt bint;
-	to_bigInt(&bint, val);
-
-	std::stringstream sstream;
-	sstream << bint;
-
-	return sstream.str();
 }
 
 void epic::lint::ChineseRemainder::alloc_largeNumberArray(LargeNumber* array, longUInt number_of_elements) {

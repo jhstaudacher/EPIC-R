@@ -1,0 +1,3 @@
+GMP_DIR=@GMP_DIR@
+CXX_STD=@CXX_STD@ 
+PKG_LIBS = -L$(GMP_DIR)/.libs -lgmpxx -lgmp

@@ -1,4 +1,4 @@
-#include "index/PowerIndexF.h"
+#include "PowerIndexF.h"
 
 #include "Logging.h"
 
@@ -28,7 +28,7 @@ std::vector<epic::bigFloat> epic::index::PowerIndexF::calculate() {
 	mCalculator->free_largeNumberArray(n_wc.getArrayPointer());
 	n_wc.free();
 
-	log::out << log::info << "Total number of winning coalitions: " << total_number_of_winning_coalitions << log::endl;
+	log::out << log::info << "Total number of winning coalitions: " << total_number_of_winning_coalitions.get_str() << log::endl;
 
 	std::vector<bigFloat> solution = RawPowerIndexF::calculate();
 

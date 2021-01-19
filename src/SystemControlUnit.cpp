@@ -1,7 +1,8 @@
 #include "SystemControlUnit.h"
 
+#include "EfficientPowerIndicesInterface.h"
 #include "HardwareInfo.h"
-#include "index/IndexFactory.h"
+#include "IndexFactory.h"
 #include "types.h"
 #include "Logging.h"
 
@@ -50,8 +51,7 @@ epic::SystemControlUnit::SystemControlUnit(io::UserInputHandler* a_userInputHand
 	calculateIndex();
 }
 
-epic::SystemControlUnit::~SystemControlUnit() {
-	delete mUserInputHandler;
+epic::SystemControlUnit::~SystemControlUnit() {	
 	delete mGame;
 }
 
@@ -138,6 +138,9 @@ std::map<std::string, std::vector<std::string>> epic::SystemControlUnit::handleR
 }
 
 bool epic::SystemControlUnit::checkHardware(index::ItfPowerIndex* index_ptr) {
+  Rcpp::Environment base = Rcpp::Environment("package:base");
+  Rcpp::Function readline = base["readline"];
+  Rcpp::Function as_character = base["as.character"];
 	bool ret = true;
 
 	HardwareInfo hInfo;
@@ -152,16 +155,19 @@ bool epic::SystemControlUnit::checkHardware(index::ItfPowerIndex* index_ptr) {
 		}
 		log::out << "Nonetheless the calculation may succeed with the use of swapping but will take much longer!" << log::endl;
 
-		std::cout << "Do you want to proceed anyway? [y/n]: ";
+		Rcpp::Rcout << "Do you want to proceed anyway? [y/n]: ";
+		char in_c;
 		std::string in;
-		std::cin >> in;
+		in_c = Rcpp::as<char>(as_character(readline("> ")));
+		in = in_c;
 		while (in != "y" && in != "n") {
-			std::cout << "You must chose either y (yes) or n (no)! [y/n]: ";
-			std::cin >> in;
+		  Rcpp::Rcout << "You must chose either y (yes) or n (no)! [y/n]: ";
+		  in_c = Rcpp::as<char>(as_character(readline("> ")));
+		  in = in_c;
 		}
-
+		
 		if (in == "n") {
-			ret = false;
+		  ret = false;
 		}
 	} else if (req > hInfo.getFreeRamSize() * 0.75) {
 		log::out << log::warning << "High memory usage! (available: " << hInfo.getFreeRamSize() << "B, approximately needed: " << req << "B)" << log::endl;

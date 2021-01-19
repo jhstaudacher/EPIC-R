@@ -1,4 +1,4 @@
-#include "index/SingleValueWS.h"
+#include "SingleValueWS.h"
 
 epic::index::SingleValueWS::SingleValueWS(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation) : RawFelsenthal(g, approx, int_representation) {
 

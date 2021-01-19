@@ -1,4 +1,4 @@
-#include "index/PowerIndexGPH.h"
+#include "PowerIndexGPH.h"
 
 #include "Array.h"
 #include "Logging.h"
@@ -31,7 +31,7 @@ std::vector<epic::bigFloat> epic::index::PowerIndexGPH::calculate() {
 
 	for (longUInt i = 0; i < mGame.getNumberOfPlayers(); ++i) {
 		solution[i] = wci[i];
-		log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << wci[i] << log::endl;
+		log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << wci[i].get_str() << log::endl;
 		solution[i] /= float_swc;
 	}
 

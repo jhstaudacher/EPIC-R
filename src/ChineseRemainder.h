@@ -57,7 +57,6 @@ public:
 	 * @note This method implementation uses bigInt addition and multiplication. If only a few operations are done before the to_bigInt() conversion the speedup of the Chinese Remainder Theorem might be less than the overhead of this conversion. In such a case it is preferable (in terms of speed) to use the BigIntCalculator() instead.
 	 */
 	void to_bigInt(bigInt* dest, const LargeNumber& value) override;
-	std::string to_string(LargeNumber& val) override;
 
 	void alloc_largeNumberArray(LargeNumber* array, longUInt number_of_elements) override;
 	void allocInit_largeNumberArray(LargeNumber* array, longUInt number_of_elements) override;

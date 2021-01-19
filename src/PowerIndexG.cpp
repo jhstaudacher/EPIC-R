@@ -1,4 +1,4 @@
-#include "index/PowerIndexG.h"
+#include "PowerIndexG.h"
 
 #include "Array.h"
 #include "Logging.h"
@@ -18,7 +18,7 @@ std::vector<epic::bigFloat> epic::index::PowerIndexG::calculate() {
 	if (log::out.getLogLevel() <= log::info) {		
 		log::out << log::info << "Number of winning coalitions a player belongs to: " << log::endl;
 		for (longUInt i = 0; i < mGame.getNumberOfPlayers(); ++i) {
-			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << solution[i] << log::endl;
+			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << GMPHelper::mpf_class_to_string(solution[i]) << log::endl;
 		}
 	}
 

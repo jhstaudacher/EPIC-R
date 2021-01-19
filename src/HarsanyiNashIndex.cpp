@@ -1,4 +1,4 @@
-#include "index/HarsanyiNashIndex.h"
+#include "HarsanyiNashIndex.h"
 
 #include "types.h"
 

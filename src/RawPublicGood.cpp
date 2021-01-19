@@ -1,4 +1,4 @@
-#include "index/RawPublicGood.h"
+#include "RawPublicGood.h"
 
 #include "Array.h"
 

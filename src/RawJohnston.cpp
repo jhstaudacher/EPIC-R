@@ -1,4 +1,4 @@
-#include "index/RawJohnston.h"
+#include "RawJohnston.h"
 
 #include "Logging.h"
 
@@ -25,7 +25,7 @@ std::vector<epic::bigFloat> epic::index::RawJohnston::calculate() {
 	/*
 	 * Preprocessing step 1: Collect sums later needed for surpluses
 	 */
-	auto max_weight = mGame.getWeights()[0];
+	auto max_weight = mGame.getWeights()[0];	
 	auto surplusSums = new longUInt[max_weight]();
 	{ // initialize surplusSums
 		longUInt hSum = 1;
@@ -182,7 +182,7 @@ std::vector<epic::bigFloat> epic::index::RawJohnston::calculate() {
 								mCalculator->mul(tmp, interm(currentWeight, s - 2), surplusSums[wj - surplus - 1]);
 								mCalculator->plusEqual(sum2, tmp);
 							}
-						}
+						}						
 						mCalculator->plusEqual(qmwcs(i, s), sum2);
 					}
 				}
@@ -231,7 +231,7 @@ std::vector<epic::bigFloat> epic::index::RawJohnston::calculate() {
 	mCalculator->free_largeNumberArray(qmwcs.getArrayPointer());
 	qmwcs.free();
 
-	log::out << log::info << "Total number of vulnerable coalitions: " << nvc << log::endl;
+	log::out << log::info << "Total number of vulnerable coalitions: " << nvc.get_str() << log::endl;
 
 	return raw_j;
 }

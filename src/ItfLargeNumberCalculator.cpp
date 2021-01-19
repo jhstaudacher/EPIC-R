@@ -1,11 +1,11 @@
-#include "lint/ItfLargeNumberCalculator.h"
+#include "ItfLargeNumberCalculator.h"
 
-#include "lint/BigIntCalculator.h"
-#include "lint/ChineseRemainder.h"
-#include "lint/ItfPrimeCalculator.h"
-#include "lint/PrimeCalculatorAddition.h"
-#include "lint/PrimeCalculatorMultiplication.h"
-#include "lint/UIntCalculator.h"
+#include "BigIntCalculator.h"
+#include "ChineseRemainder.h"
+#include "ItfPrimeCalculator.h"
+#include "PrimeCalculatorAddition.h"
+#include "PrimeCalculatorMultiplication.h"
+#include "UIntCalculator.h"
 
 epic::lint::ItfLargeNumberCalculator* epic::lint::ItfLargeNumberCalculator::new_calculator(const bigInt& max_value, Operation op, IntRepresentation int_representation) {
 	ItfLargeNumberCalculator* ret;

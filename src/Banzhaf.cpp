@@ -1,7 +1,8 @@
-#include "index/Banzhaf.h"
+#include "Banzhaf.h"
 
 #include "Array.h"
 #include "Logging.h"
+#include "types.h"
 
 
 epic::index::Banzhaf::Banzhaf(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation)
@@ -28,14 +29,14 @@ std::vector<epic::bigFloat> epic::index::Banzhaf::calculate() {
 		bigFloat float_total_n_sp = tmp;
 
 		if (log::out.getLogLevel() <= log::info) {
-			bigInt factor = bigInt(1) << mGame.getNumberOfPlayersWithWeight0(); // additional winning coalitions due to players of weight 0
-
-			log::out << log::info << "Total number of swings: " << float_total_n_sp * factor << log::endl;
+			log::out << log::info << "Total number of swings: " << GMPHelper::mpf_class_to_string(float_total_n_sp) << log::endl;
 			log::out << log::info << "Raw Banzhaf:" << log::endl;
 
+			bigInt factor = bigInt(1) << mGame.getNumberOfPlayersWithWeight0(); // additional winning coalitions due to players of weight 0
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&tmp, n_sp[i]);
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << tmp * factor << log::endl;
+			  bigInt output = tmp * factor;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << output.get_str() << log::endl;
 				solution[i] = tmp / float_total_n_sp;
 			}
 			for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {

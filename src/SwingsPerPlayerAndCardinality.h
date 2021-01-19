@@ -3,7 +3,7 @@
 
 #include "Array.h"
 #include "ItfPowerIndex.h"
-#include "lint/LargeNumber.h"
+#include "LargeNumber.h"
 
 namespace epic::index {
 

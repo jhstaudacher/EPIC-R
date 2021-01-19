@@ -35,7 +35,6 @@ public:
 	void assign_one(LargeNumber& dest) override;
 
 	void to_bigInt(bigInt* dest, const LargeNumber& value) override;
-	std::string to_string(LargeNumber& val) override;
 
 	void alloc_largeNumberArray(LargeNumber* array, longUInt number_of_elements) override;
 	void allocInit_largeNumberArray(LargeNumber* array, longUInt number_of_elements) override;

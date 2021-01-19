@@ -1,4 +1,4 @@
-#include "index/SingleValueWM.h"
+#include "SingleValueWM.h"
 
 epic::index::SingleValueWM::SingleValueWM(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation) : DeeganPackel(g, approx, int_representation) {
 

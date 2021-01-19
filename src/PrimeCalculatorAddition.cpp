@@ -1,4 +1,4 @@
-#include "lint/PrimeCalculatorAddition.h"
+#include "PrimeCalculatorAddition.h"
 
 #include <vector>
 

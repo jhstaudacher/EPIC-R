@@ -1,4 +1,4 @@
-#include "index/RawPowerIndexG.h"
+#include "RawPowerIndexG.h"
 
 #include "Array.h"
 #include "Logging.h"

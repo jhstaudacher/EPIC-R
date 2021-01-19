@@ -1,4 +1,4 @@
-#include "index/Johnston.h"
+#include "Johnston.h"
 
 #include "Logging.h"
 
@@ -17,7 +17,7 @@ std::vector<epic::bigFloat> epic::index::Johnston::calculate() {
 	if (log::out.getLogLevel() <= log::info) {
 		log::out << log::info << "Raw Johnston: " << log::endl;
 		for (longUInt i = 0; i < mGame.getNumberOfPlayers(); ++i) {
-			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << solution[i] << log::endl;
+			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << GMPHelper::mpf_class_to_string(solution[i]) << log::endl;
 		}
 	}
 

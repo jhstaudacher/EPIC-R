@@ -2,8 +2,8 @@
 #define EPIC_INDEX_ABSOLUTEPOWERINDEXG_H_
 
 #include "ItfUpperBoundApproximation.h"
-#include "index/RawBanzhaf.h"
-#include "lint/ItfLargeNumberCalculator.h"
+#include "RawBanzhaf.h"
+#include "ItfLargeNumberCalculator.h"
 
 namespace epic::index {
 

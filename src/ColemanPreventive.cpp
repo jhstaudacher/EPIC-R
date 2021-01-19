@@ -1,4 +1,4 @@
-#include "index/ColemanPreventive.h"
+#include "ColemanPreventive.h"
 
 #include "Logging.h"
 
@@ -32,15 +32,16 @@ std::vector<epic::bigFloat> epic::index::ColemanPreventive::calculate() {
 
 		if (log::out.getLogLevel() <= log::info) {
 			bigInt factor = bigInt(1) << mGame.getNumberOfPlayersWithWeight0();
-
-			log::out << log::info << "Total number of winning coalitions: " << big_total_wc * factor << log::endl;
+      bigInt output =  big_total_wc * factor;
+			log::out << log::info << "Total number of winning coalitions: " << output.get_str() << log::endl;
 			log::out << log::info << "Number of times each player is a swing player:" << log::endl;
 
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&sp, n_sp[i]);
 				solution[i] = sp;
 				solution[i] /= big_total_wc;
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << sp * factor << log::endl;
+				output = sp * factor;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << output.get_str() << log::endl;
 			}
 			for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {
 				log::out << "Player " << mGame.playerIndexToNumber(i) << ": 0" << log::endl;

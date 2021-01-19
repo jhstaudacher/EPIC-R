@@ -1,4 +1,4 @@
-#include "index/PublicHelpThetaPH.h"
+#include "PublicHelpThetaPH.h"
 
 #include "Logging.h"
 
@@ -32,7 +32,8 @@ std::vector<epic::bigFloat> epic::index::PublicHelpThetaPH::calculate() {
 
 			for (longUInt i = 0; i < mGame.getNumberOfPlayers(); ++i) {
 				solution[i] = big_wci[i] / float_swc;
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << big_wci[i] * factor << log::endl;
+			  bigInt output = big_wci[i] * factor;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << output.get_str() << log::endl;
 			}
 
 		} else {

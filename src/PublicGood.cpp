@@ -1,4 +1,4 @@
-#include "index/PublicGood.h"
+#include "PublicGood.h"
 
 #include "Array.h"
 #include "Logging.h"
@@ -38,7 +38,7 @@ std::vector<epic::bigFloat> epic::index::PublicGood::calculate() {
 		for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 			mCalculator->to_bigInt(&big_mwc, mwc[i]);
 			solution[i] = big_mwc;
-			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << big_mwc << log::endl;
+			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << big_mwc.get_str() << log::endl;
 			solution[i] /= big_mwc_sum;
 		}
 		for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {

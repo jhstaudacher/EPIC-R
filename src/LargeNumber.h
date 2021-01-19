@@ -6,7 +6,7 @@
 namespace epic::lint {
 
 /**
- * Storing the values representing a large integer number (the representation depends on the used ItfLargeNumberCalculator).
+ * Storing the values representing a large integer number (the representation depends on the used ItfLargeNumberCalculator)
  *
  * This union can only be used in combination of an ItfLargeNumberCalculator object. Depending on that object either the uint, array or bint member get used.
  * First of all the union must be initialized using the ItfLargeNumberCalculator::alloc_largeNumber() or ItfLargeNumberCalculator::allocInit_largeNumber() method. After allocation/initialization  different mathematical operations can get applied to the ChineseNumber object using the ItfLargeNumberCalculator methods (e.g. assign(), plus(), plusEqual(), etc.). After usage the object must be freed using the ItfLargeNumberCalculator::free_largeNumber() method.
@@ -19,13 +19,6 @@ union LargeNumber {
 	longUInt* array; // an array of integers (same number as the primes) representing a big number
 	bigInt* bint;	 // pointer to an BigInt object (needed to save memory for very large problems since bigInt only allocates as much memory as it needs)
 };
-
-/**
- * # How to use LargeNumber objects for calculations
- *
- * **examples/LargeNumber_usage.cpp**:
- * @example{lineno} LargeNumber_usage.cpp
- */
 
 } /* namespace epic::lint */
 

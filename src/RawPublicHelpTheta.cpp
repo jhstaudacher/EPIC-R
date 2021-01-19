@@ -1,4 +1,4 @@
-#include "index/RawPublicHelpTheta.h"
+#include "RawPublicHelpTheta.h"
 
 #include "Logging.h"
 

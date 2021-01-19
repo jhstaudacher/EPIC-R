@@ -1,4 +1,4 @@
-#include "index/AbsolutePowerIndexG.h"
+#include "AbsolutePowerIndexG.h"
 
 #include "Array.h"
 #include "Logging.h"

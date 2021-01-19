@@ -1,4 +1,4 @@
-#include "index/RawPowerIndexF.h"
+#include "RawPowerIndexF.h"
 
 #include "Logging.h"
 

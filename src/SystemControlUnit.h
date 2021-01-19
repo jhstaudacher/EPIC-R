@@ -2,9 +2,9 @@
 #define EPIC_SYSTEMCONTROLUNIT_H_
 
 #include "Game.h"
-#include "index/ItfPowerIndex.h"
-#include "io/DataOutput.h"
-#include "io/UserInputHandler.h"
+#include "ItfPowerIndex.h"
+#include "DataOutput.h"
+#include "UserInputHandler.h"
 
 
 namespace epic {

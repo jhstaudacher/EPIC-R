@@ -1,4 +1,4 @@
-#include "io/DataInput.h"
+#include "DataInput.h"
 
 #include <algorithm>
 #include <fstream>

@@ -1,4 +1,4 @@
-#include "index/NevisonPH.h"
+#include "NevisonPH.h"
 
 #include "Logging.h"
 
@@ -24,7 +24,8 @@ std::vector<epic::bigFloat> epic::index::NevisonPH::calculate() {
 		bigFloat combinations = tmp;
 
 		for (longUInt i = 0; i < mGame.getNumberOfPlayers(); ++i) {
-			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << big_wci[i] * factor << log::endl;
+		  bigInt output =  big_wci[i] * factor;
+			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << output.get_str() << log::endl;
 			solution[i] = (big_wci[i] * factor) / combinations;
 		}
 	}

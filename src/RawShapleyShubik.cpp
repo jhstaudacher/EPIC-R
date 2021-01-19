@@ -1,4 +1,4 @@
-#include "index/RawShapleyShubik.h"
+#include "RawShapleyShubik.h"
 
 #include "Array.h"
 

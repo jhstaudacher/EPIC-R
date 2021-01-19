@@ -1,4 +1,4 @@
-#include "index/RawBanzhaf.h"
+#include "RawBanzhaf.h"
 
 #include <iostream>
 

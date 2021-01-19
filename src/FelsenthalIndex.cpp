@@ -1,4 +1,4 @@
-#include "index/FelsenthalIndex.h"
+#include "FelsenthalIndex.h"
 
 #include "Logging.h"
 
@@ -45,11 +45,11 @@ std::vector<epic::bigFloat> epic::index::FelsenthalIndex::calculate() {
 		if (arbitrary_sum_mwcs == 0) {
 			log::out << log::warning << "sum of minimal winning coalitions of least size is zero!" << log::endl;
 		} else {
-			log::out << log::info << "Total number of minimal winning coalitions of least size: " << arbitrary_sum_mwcs << log::endl;
+			log::out << log::info << "Total number of minimal winning coalitions of least size: " << GMPHelper::mpf_class_to_string(arbitrary_sum_mwcs) << log::endl;
 			log::out << log::info << "Number of minimal winning coalitions of least size individual players belong to: " << log::endl;
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&int_tmp, mwcs[i]);
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << int_tmp << log::endl;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << int_tmp.get_str() << log::endl;
 				solution[i] = (bigFloat)int_tmp / arbitrary_sum_mwcs;
 			}
 

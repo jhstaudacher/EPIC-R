@@ -1,4 +1,4 @@
-#include "index/RawFelsenthal.h"
+#include "RawFelsenthal.h"
 
 epic::index::RawFelsenthal::RawFelsenthal(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation)
 	: ItfPowerIndex(g) {

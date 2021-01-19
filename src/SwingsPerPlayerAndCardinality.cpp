@@ -1,4 +1,4 @@
-#include "index/SwingsPerPlayerAndCardinality.h"
+#include "SwingsPerPlayerAndCardinality.h"
 
 epic::index::SwingsPerPlayerAndCardinality::SwingsPerPlayerAndCardinality(Game& g)
 	: ItfPowerIndex(g) {

@@ -1,4 +1,4 @@
-#include "lint/PrimeCalculatorMultiplication.h"
+#include "PrimeCalculatorMultiplication.h"
 
 /**
  * @todo If more primes are needed than statically pre-computed at compilation time, a new array will be allocated each time the function get called. Those arrays will never be deleted. Since only one index for only one problem gets calculated each time the program runs, this has no negative effect.

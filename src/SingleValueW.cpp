@@ -1,4 +1,4 @@
-#include "index/SingleValueW.h"
+#include "SingleValueW.h"
 
 epic::index::SingleValueW::SingleValueW(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation) : RawBanzhaf(g, approx, int_representation) {
 

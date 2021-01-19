@@ -6,6 +6,8 @@
 #include <array>
 #include <map>
 
+#include "EfficientPowerIndicesInterface.h"
+
 namespace epic::log {
 
 /**
@@ -83,7 +85,7 @@ public:
 	 *
 	 * @note The current log level will be set to log_level.
 	 */
-	explicit Logger(std::array<std::ostream*, cLevelCount> o_streams = {&std::cout, &std::cout, &std::cerr}, level log_level = info);
+	explicit Logger(std::array<std::ostream*, cLevelCount> o_streams = {&Rcpp::Rcout, &Rcpp::Rcout, &Rcpp::Rcerr}, level log_level = info);
 	~Logger();
 
 	/**

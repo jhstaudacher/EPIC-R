@@ -1,4 +1,4 @@
-#include "index/AbsoluteBanzhaf.h"
+#include "AbsoluteBanzhaf.h"
 
 #include "Array.h"
 #include "Logging.h"
@@ -26,7 +26,8 @@ std::vector<epic::bigFloat> epic::index::AbsoluteBanzhaf::calculate() {
 			bigInt factor = bigInt(1) << mGame.getNumberOfPlayersWithWeight0(); // additional winning coalitions due to players of weight 0
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&tmp, n_sp[i]);
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << tmp * factor << log::endl;
+			  bigInt output = tmp * factor;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << output.get_str() << log::endl;
 				solution[i] = tmp / combinations;
 			}
 			for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {

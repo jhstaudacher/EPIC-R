@@ -1,4 +1,4 @@
-#include "index/Rae.h"
+#include "Rae.h"
 
 #include "Logging.h"
 
@@ -30,7 +30,8 @@ std::vector<epic::bigFloat> epic::index::Rae::calculate() {
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&sp, n_sp[i]);
 				solution[i] = (sp / n_combinations) + gamma;
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << sp * factor << log::endl;
+				bigInt output = sp * factor;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << output.get_str() << log::endl;
 			}
 			for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {
 				solution[i] = 0.5;

@@ -1,4 +1,4 @@
-#include "index/AbsolutePublicGood.h"
+#include "AbsolutePublicGood.h"
 
 #include "Array.h"
 #include "Logging.h"
@@ -21,7 +21,7 @@ std::vector<epic::bigFloat> epic::index::AbsolutePublicGood::calculate() {
 
 	calculateMinimalWinningCoalitionsPerPlayer(mwc);
 
-	log::out << log::info << "Total number of minimal winning coalitions: " << total_mwc << log::endl;
+	log::out << log::info << "Total number of minimal winning coalitions: " << total_mwc.get_str() << log::endl;
 	log::out << log::info << "Number of minimal winning coalitions individual players belong to: " << log::endl;
 
 
@@ -32,7 +32,7 @@ std::vector<epic::bigFloat> epic::index::AbsolutePublicGood::calculate() {
 		for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 			mCalculator->to_bigInt(&big_mwc, mwc[i]);
 			solution[i] = big_mwc;
-			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << big_mwc << log::endl;
+			log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << big_mwc.get_str() << log::endl;
 			solution[i] /= total_mwc;
 		}
 		for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {

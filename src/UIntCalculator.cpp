@@ -1,4 +1,4 @@
-#include "lint/UIntCalculator.h"
+#include "UIntCalculator.h"
 
 #include "Logging.h"
 
@@ -64,10 +64,6 @@ void epic::lint::UIntCalculator::assign_one(LargeNumber& dest) {
 
 void epic::lint::UIntCalculator::to_bigInt(bigInt* dest, const LargeNumber& value) {
 	mpz_set_ui(dest->get_mpz_t(), value.uint);
-}
-
-std::string epic::lint::UIntCalculator::to_string(LargeNumber& val) {
-	return std::to_string(val.uint);
 }
 
 void epic::lint::UIntCalculator::alloc_largeNumberArray(LargeNumber* array, longUInt number_of_elements) {

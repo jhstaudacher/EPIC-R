@@ -176,16 +176,6 @@ public:
 	virtual void to_bigInt(bigInt* dest, const LargeNumber& value) = 0;
 
 	/**
-	 * Getting the number represented by val as string.
-	 *
-	 * @param val The value that should get converted to string
-	 *
-	 * @return A string representation of the number stored in val.
-	 * @warning This method is not designed to be efficient (neither in terms of space nor in terms of time). It is intended to simplify the output for debug purposes.
-	 */
-	virtual std::string to_string(LargeNumber& val) = 0;
-
-	/**
 	 * Allocating the LargeNumber objects of a C-style array.
 	 *
 	 * This is the same functionality as calling the alloc_largeNumber() method for each array entry.

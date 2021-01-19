@@ -3,7 +3,7 @@
 
 #include "ItfUpperBoundApproximation.h"
 #include "RawShapleyShubik.h"
-#include "lint/ItfLargeNumberCalculator.h"
+#include "ItfLargeNumberCalculator.h"
 
 namespace epic::index {
 
