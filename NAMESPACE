@@ -1,0 +1,4 @@
+useDynLib(EfficientPowerIndices, .registration=TRUE)
+exportPattern("^[[:alpha:]]+")
+importFrom(Rcpp, evalCpp)
+importFrom("utils", "read.csv")
