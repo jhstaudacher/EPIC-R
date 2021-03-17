@@ -29,7 +29,7 @@ bool validateQuota(double quota);
 
 
 // [[Rcpp::export]]
-std::map<std::string,std::vector<std::string>> ComputePowerIndex(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers=false, bool verbose = false, bool weightedMajorityGame = false) {
+std::vector<double> ComputePowerIndex(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers=false, bool verbose = false, bool weightedMajorityGame = false) {
   
 	std::string s_index = crs(index);
 
@@ -76,7 +76,7 @@ std::map<std::string,std::vector<std::string>> ComputePowerIndex(Rcpp::String in
 	epic::io::UserInputHandler userInputHandler(s_index, v_weights, v_quota, epic::io::OutputType::R, filterNullPlayers, verbose);
 	
 	
-	std::map<std::string,std::vector<std::string>> results;
+	std::vector<double> results;
 	results.clear();
   
   try {
