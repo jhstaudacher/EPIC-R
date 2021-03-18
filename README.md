@@ -1,4 +1,4 @@
-# EPIC R Package - Efficient Power Index Calculation
+# EPIC R Package - Efficient Power Index Computation
 
 [[_TOC_]]
 

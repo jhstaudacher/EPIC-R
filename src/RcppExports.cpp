@@ -6,7 +6,7 @@
 using namespace Rcpp;
 
 // ComputePowerIndex
-std::vector<double> ComputePowerIndex(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers, bool verbose, bool weightedMajorityGame);
+std::vector<std::string> ComputePowerIndex(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers, bool verbose, bool weightedMajorityGame);
 RcppExport SEXP _EfficientPowerIndices_ComputePowerIndex(SEXP indexSEXP, SEXP weightsSEXP, SEXP quotaSEXP, SEXP filterNullPlayersSEXP, SEXP verboseSEXP, SEXP weightedMajorityGameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
