@@ -29,7 +29,7 @@ bool validateQuota(double quota);
 
 
 // [[Rcpp::export]]
-std::vector<std::string> ComputePowerIndex(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers=false, bool verbose = false, bool weightedMajorityGame = false) {
+std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers=false, bool verbose = false, bool weightedMajorityGame = false) {
   
 	std::string s_index = crs(index);
 
