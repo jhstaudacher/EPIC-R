@@ -59,7 +59,8 @@ The R package offers the function `ComputePowerIndex` which expects the followin
 | ------ | -------- | ----------- |
 | verbose | boolean | adds extra output |
 | filterNullPlayers | boolean| excludes null player from the calculation (not compatible with all indices!) |
-| weightedMajorityGame | boolean | uses a weighted majority Game for the underlying calculations |
+| weightedMajorityGame | boolean | uses a weighted majority game (i.e. the weight sum must be greater than the quota for a coalition to be considered a winning coalition) for the underlying calculations |
+| useGMPTypes | boolean | return the results as GNU MPFR types|
 
 
 ## Available indices
