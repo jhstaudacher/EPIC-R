@@ -3,8 +3,8 @@
 #include "EfficientPowerIndicesInterface.h"
 #include "HardwareInfo.h"
 #include "IndexFactory.h"
-#include "types.h"
 #include "Logging.h"
+#include "types.h"
 
 #include <chrono>
 #include <cmath>
@@ -12,7 +12,7 @@
 #include <vector>
 
 #ifndef M_E // undefined on Windows/MSYS2
-	#define M_E 2.7182818284590452354
+#define M_E 2.7182818284590452354
 #endif
 
 //Constructor to handle application
@@ -29,11 +29,8 @@ epic::SystemControlUnit::SystemControlUnit(int numberOfInputArguments, char* vec
 	//Estimate the time needed to calculate the index
 	estimateTime();
 
-	std::chrono::steady_clock::time_point begin = std::chrono::steady_clock::now();
 	//calculate Index
 	calculateIndex();
-	std::chrono::steady_clock::time_point end = std::chrono::steady_clock::now();
-	log::out << log::info << "Calculation completed (" << std::chrono::duration_cast<std::chrono::microseconds>(end - begin).count() << "µs)" << log::endl << log::endl;
 
 	//handle output
 	handleOutput();
@@ -63,11 +60,18 @@ void epic::SystemControlUnit::calculateIndex() {
 				 << log::endl;
 
 		std::string idx = mUserInputHandler->getIndexToCompute();
+
+		std::chrono::steady_clock::time_point t_begin = std::chrono::steady_clock::now();
 		if (idx == "W" || idx == "WM" || idx == "WS") { // single value calculation
 			mGame->setSingleValueSolution(index->calculate()[0]);
 		} else {
 			mGame->setSolution(index->calculate());
 		}
+		std::chrono::steady_clock::time_point t_end = std::chrono::steady_clock::now();
+
+		log::out << log::info << "Calculation completed (" << std::chrono::duration_cast<std::chrono::microseconds>(t_end - t_begin).count() << " µs)" << log::endl;
+	} else {
+		log::out << log::info << "Calculation aborted" << log::endl;
 	}
 
 	index::IndexFactory::delete_powerIndex(index);
@@ -146,12 +150,14 @@ bool epic::SystemControlUnit::checkHardware(index::ItfPowerIndex* index_ptr) {
 	HardwareInfo hInfo;
 	longUInt req = index_ptr->getMemoryRequirement();
 
-	log::out << log::info << "Approximated RAM usage: " << req << " Bytes" << log::endl;
-	if (req > hInfo.getFreeRamSize()) {
+	log::out << log::info << "Approximated RAM usage: " << req << " " << cMemUnit_name << log::endl;
+	if (hInfo.getFreeRamSize() == 0) {
+		log::out << log::warning << "Unable to read RAM size! (approximately needed: " << req << " " << cMemUnit_name << ")" << log::endl;
+	} else if (req > hInfo.getFreeRamSize()) {
 		if (req > hInfo.getTotalRamSize()) {
-			log::out << log::warning << "Not enough memory! (total: " << hInfo.getTotalRamSize() << "B, approximately needed: " << req << "B)" << log::endl;
+			log::out << log::warning << "Not enough memory! (total: " << hInfo.getTotalRamSize() << " " << cMemUnit_name << ", approximately needed: " << req << " " << cMemUnit_name << ")" << log::endl;
 		} else {
-			log::out << log::warning << "Not enough memory! (available: " << hInfo.getFreeRamSize() << "B, approximately needed: " << req << "B!" << log::endl;
+			log::out << log::warning << "Not enough memory! (available: " << hInfo.getFreeRamSize() << " " << cMemUnit_name << ", approximately needed: " << req << " " << cMemUnit_name << ")" << log::endl;
 		}
 		log::out << "Nonetheless the calculation may succeed with the use of swapping but will take much longer!" << log::endl;
 
@@ -170,7 +176,7 @@ bool epic::SystemControlUnit::checkHardware(index::ItfPowerIndex* index_ptr) {
 		  ret = false;
 		}
 	} else if (req > hInfo.getFreeRamSize() * 0.75) {
-		log::out << log::warning << "High memory usage! (available: " << hInfo.getFreeRamSize() << "B, approximately needed: " << req << "B)" << log::endl;
+		log::out << log::warning << "High memory usage! (available: " << hInfo.getFreeRamSize() << " " << cMemUnit_name << ", approximately needed: " << req << " " << cMemUnit_name << ")" << log::endl;
 	}
 
 	return ret;
@@ -288,7 +294,7 @@ void epic::SystemControlUnit::estimateTime() {
 			estimation = "trivial or not implemented";
 		}
 
-		log::out << log::info << "Calculation time estimation: " << estimation <<  " (only accurate without swap-usage)" << log::endl;
+		log::out << log::info << "Calculation time estimation: " << estimation << " (only accurate without swap-usage)" << log::endl;
 	}
 }
 

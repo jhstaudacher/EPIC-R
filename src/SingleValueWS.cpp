@@ -1,7 +1,7 @@
 #include "SingleValueWS.h"
 
-epic::index::SingleValueWS::SingleValueWS(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation) : RawFelsenthal(g, approx, int_representation) {
-
+epic::index::SingleValueWS::SingleValueWS(Game& g, ItfUpperBoundApproximation* approx, IntRepresentation int_representation)
+	: RawFelsenthal(g, approx, int_representation) {
 }
 
 std::vector<epic::bigFloat> epic::index::SingleValueWS::calculate() {
@@ -35,8 +35,10 @@ std::string epic::index::SingleValueWS::getFullName() {
 }
 
 epic::longUInt epic::index::SingleValueWS::getMemoryRequirement() {
-	bigInt memory = RawFelsenthal::getMemoryRequirement();
-	memory += mCalculator->getLargeNumberSize(); // sum_mwcs
+	bigInt memory = mCalculator->getLargeNumberSize(); // sum_mwcs
+	memory /= cMemUnit_factor;
+
+	memory += RawFelsenthal::getMemoryRequirement();
 
 	longUInt ret = 0;
 	if (memory.fits_ulong_p()) {

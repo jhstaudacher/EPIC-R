@@ -46,10 +46,10 @@ private:
     * The quota of the mGame
     */
 	longUInt mQuota;
-    /**
+	/**
     * The quota of the mGame as float
     */
-	double mFloatQuota;    
+	double mFloatQuota;
 	/**
     * The specified output type/channel
     */

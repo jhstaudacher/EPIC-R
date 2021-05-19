@@ -1,8 +1,8 @@
 #include "UserInputHandler.h"
 
+#include "Logging.h"
 #include "IndexFactory.h"
 #include "DataInput.h"
-#include "Logging.h"
 
 #include <getopt.h>
 #include <string>
@@ -11,7 +11,7 @@ epic::io::UserInputHandler::UserInputHandler(const std::string& index, const std
 	mIndex = index;
 	mWeights = weights;
 	mQuota = quota;
-	mFloatQuota = 0.0;	
+	mFloatQuota = 0.0;
 	mOutputType = outputType;
 	mTestFlag = false;
 	mInputFloatWeights = false;
@@ -31,7 +31,7 @@ epic::io::UserInputHandler::UserInputHandler() {
 	mIndex = "Invalid";
 	mWeights.clear();
 	mQuota = 0;
-	mFloatQuota = 0.0;	
+	mFloatQuota = 0.0;
 	mOutputType = screen;
 	mTestFlag = false;
 	mInputFloatWeights = false;
@@ -46,13 +46,12 @@ bool epic::io::UserInputHandler::handleWeightsAndQuota(const std::string& fileNa
 		floatWeights = DataInput::inputFloatCSV(fileName, mTestFlag);
 		floatWeights.push_back(mFloatQuota);
 		UpscaleFloatToIntAndReturnMultiplicator(floatWeights, mWeights);
-		mQuota = mWeights.back();	
-		mWeights.pop_back();		
+		mQuota = mWeights.back();
+		mWeights.pop_back();
 	} else {
 		if (static_cast<longUInt>(mFloatQuota) == mFloatQuota) {
   			mQuota = static_cast<longUInt>(mFloatQuota);
-		}
-		else {
+		} else {
 			Rcpp::Rcout << "Float quota specified without the --float flag." << std::endl;
 			return false;
 		}
@@ -81,7 +80,7 @@ bool epic::io::UserInputHandler::handleQuotaFromWeightfile(const std::string& fi
 }
 
 bool epic::io::UserInputHandler::handleQuota(char* value) {
-	mFloatQuota = std::atof(value);		
+	mFloatQuota = std::atof(value);
 
 	if (mFloatQuota > 0) {
 		return true;
@@ -242,7 +241,7 @@ bool epic::io::UserInputHandler::parseCommandLine(int numberOfArguments, char* v
 				return false;
 		}
 	}
-	
+
 	if (!handleWeightsAndQuota(mWeightsFile)) {
 		return false;
 	}

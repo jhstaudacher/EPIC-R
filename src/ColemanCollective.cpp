@@ -30,7 +30,7 @@ std::vector<epic::bigFloat> epic::index::ColemanCollective::calculate() {
 	{
 		bigInt big_total_wc;
 		mCalculator->to_bigInt(&big_total_wc, total_wc);
-    bigInt output =  big_total_wc * (bigInt(1) << mGame.getNumberOfPlayersWithWeight0());
+    	bigInt output =  big_total_wc * (bigInt(1) << mGame.getNumberOfPlayersWithWeight0());
 		log::out << log::info << "Total number of winning coalitions: " << output.get_str() << log::endl;
 
 		//total number of winning coalitions / maximal number of winning coalitions(= 2^mNonZeroPlayerCount)
@@ -52,8 +52,10 @@ std::string epic::index::ColemanCollective::getFullName() {
 }
 
 epic::longUInt epic::index::ColemanCollective::getMemoryRequirement() {
-	bigInt memory = (mGame.getWeightSum() + 1 - mGame.getQuota()) * mCalculator->getLargeNumberSize(); // n_wc
-	memory += mCalculator->getLargeNumberSize();													   // total_wc
+	bigInt memory = mCalculator->getLargeNumberSize();
+	memory *= mGame.getWeightSum() + 1 - mGame.getQuota(); // n_wc
+	memory += mCalculator->getLargeNumberSize();	       // total_wc
+	memory /= cMemUnit_factor;
 
 	longUInt ret = 0;
 	if (memory.fits_ulong_p()) {

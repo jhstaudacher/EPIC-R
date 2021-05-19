@@ -2,21 +2,30 @@
 #define EPIC_TYPES_H_
 
 #include <cinttypes>
-#include <sstream>
 #include <gmpxx.h>
+#include <sstream>
 
 namespace epic {
 
 typedef mpz_class bigInt;
 typedef mpf_class bigFloat;
 
-#if defined(__linux__)
-typedef std::uint64_t longUInt;
-typedef std::int64_t longInt;
-#else
-typedef unsigned int longUInt;
-typedef int longInt;
-#endif
+// Larger integers are better. However the current GMP version can not handle long long integers.
+typedef unsigned long longUInt;
+typedef long longInt;
+
+
+/**
+ * The calculation factor between the base unit (Bytes) and cMemUnit_name!
+ * x [Byte] / cMemUnit_factor = y [cMemUnit_name]
+ */
+static const longUInt cMemUnit_factor = 1024;
+
+/**
+ * The shortcut for the used memory unit.
+ */
+static const std::string cMemUnit_name = "KiB";
+
 
 /**
  * Enum-Type defining the different options for large integer representations
@@ -63,16 +72,15 @@ public:
 	 * @param value The bigFloat object to convert
 	 * @return The std::string of the bigFloat object
 	 */
-	static std::string mpf_class_to_string(mpf_class& value) {	  
-	  double dValue = value.get_d();
-	  std::ostringstream stringstream;
-	  stringstream << dValue;
-	  
-	  std::string str = stringstream.str();
-	  
-	  return str;	    
-	}
+	static std::string mpf_class_to_string(mpf_class& value) {
+		double dValue = value.get_d();
+		std::ostringstream stringstream;
+		stringstream << dValue;
 
+		std::string str = stringstream.str();
+
+		return str;
+	}
 
 private:
 	static constexpr longUInt mLimbSize = GMP_LIMB_BITS / 8;

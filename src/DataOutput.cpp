@@ -41,7 +41,6 @@ std::vector<std::string> epic::io::DataOutput::outputToR(Game& game, const std::
 	std::vector<bigFloat> results = game.getSolution();		
 	std::vector<std::string> r_results;
 	for (auto& result : results) {
-
 		r_results.push_back(GMPHelper::mpf_class_to_string(result));
 	}	
 
