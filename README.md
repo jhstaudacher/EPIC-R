@@ -112,7 +112,7 @@ For a simple example we want to calculate the Banzhaf index for a simple 5-playe
 
 `library(EfficientPowerIndices)`
 
-`ComputePowerIndex(index = "BZ", weights = c(9, 5, 3, 1, 1,), quota = 11, verbose = TRUE)`
+`ComputePowerIndex(index = "BZ", weights = c(9, 5, 3, 1, 1), quota = 11, verbose = TRUE)`
 
 By setting the verbose parameter to `TRUE` we get extra output like the raw Banzhaf values and the total number of swings (sum over the raw Banzhaf values).
 
