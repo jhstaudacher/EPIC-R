@@ -21,9 +21,9 @@
 1. Download the repository. This can be done in two different ways:    
     1. Clone the repository using git (`git clone ...`)
     1. Download the repository as ZIP archive using the download dropdown menu on the Repository overview. The archive must get extracted after download.
+    
 
-
-1. For Linux: Run `autoconf` in the repository to generate the `configure` file from the `configure.ac` template.
+1. For Linux: Run `autoconf` in the repository to generate the `configure` file from the `configure.ac` template. Then run `./configure`.
 
     It is also possible to manually create the `Makevars` file by adding the following contents and inserting the path to the GMP installation:
     ```
@@ -57,7 +57,7 @@ The R package offers the function `ComputePowerIndex` which expects the followin
 
 | name | type | description |
 | ------ | -------- | ----------- |
-| precoalitions | List of integer vectors | specifies the structure of the precoalitions (player numbers are from 1 to n. For example list = (c(1,3), c(2,4), c(5)) would be a preacoalition between player 1 and 3, player 2 and 4 while player 5 is alone.) |
+| precoalitions | List of integer vectors | specifies the structure of the precoalitions (player numbers are from 1 to n. For example precoalitions = list(c(1,3), c(2,4), c(5)) would be a preacoalition between player 1 and 3, player 2 and 4 while player 5 is alone.) |
 | verbose | boolean | adds extra output |
 | filterNullPlayers | boolean| excludes null player from the calculation (not compatible with all indices!) |
 | weightedMajorityGame | boolean | uses a weighted majority game (i.e. the weight sum must be greater than the quota for a coalition to be considered a winning coalition) for the underlying calculations |
