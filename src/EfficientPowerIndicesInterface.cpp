@@ -90,7 +90,11 @@ std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Nume
 	    tmp = precoalitions[i];
 	    tmp2.clear();
 	    for (int j = 0; j < tmp.size(); j++){
-	      tmp2.push_back(tmp[j] - 1);
+	      int playerIndex = tmp[j] - 1;
+	      if (playerIndex < 0 ) {
+	        Rcpp::stop("Invalid player index for the structure of the precoalitions. Player numbers are from 1 to n.");
+	      }
+	      tmp2.push_back(playerIndex);
 	    }
 	    v_precoalitions.push_back(tmp2);
 	  }
