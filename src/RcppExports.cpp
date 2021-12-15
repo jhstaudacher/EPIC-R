@@ -6,24 +6,25 @@
 using namespace Rcpp;
 
 // ComputePowerIndexAdapter
-std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers, bool verbose, bool weightedMajorityGame);
-RcppExport SEXP _EfficientPowerIndices_ComputePowerIndexAdapter(SEXP indexSEXP, SEXP weightsSEXP, SEXP quotaSEXP, SEXP filterNullPlayersSEXP, SEXP verboseSEXP, SEXP weightedMajorityGameSEXP) {
+std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::NumericVector weights, double quota, Rcpp::List precoalitions, bool filterNullPlayers, bool verbose, bool weightedMajorityGame);
+RcppExport SEXP _EfficientPowerIndices_ComputePowerIndexAdapter(SEXP indexSEXP, SEXP weightsSEXP, SEXP quotaSEXP, SEXP precoalitionsSEXP, SEXP filterNullPlayersSEXP, SEXP verboseSEXP, SEXP weightedMajorityGameSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::String >::type index(indexSEXP);
     Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< double >::type quota(quotaSEXP);
+    Rcpp::traits::input_parameter< Rcpp::List >::type precoalitions(precoalitionsSEXP);
     Rcpp::traits::input_parameter< bool >::type filterNullPlayers(filterNullPlayersSEXP);
     Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
     Rcpp::traits::input_parameter< bool >::type weightedMajorityGame(weightedMajorityGameSEXP);
-    rcpp_result_gen = Rcpp::wrap(ComputePowerIndexAdapter(index, weights, quota, filterNullPlayers, verbose, weightedMajorityGame));
+    rcpp_result_gen = Rcpp::wrap(ComputePowerIndexAdapter(index, weights, quota, precoalitions, filterNullPlayers, verbose, weightedMajorityGame));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EfficientPowerIndices_ComputePowerIndexAdapter", (DL_FUNC) &_EfficientPowerIndices_ComputePowerIndexAdapter, 6},
+    {"_EfficientPowerIndices_ComputePowerIndexAdapter", (DL_FUNC) &_EfficientPowerIndices_ComputePowerIndexAdapter, 7},
     {NULL, NULL, 0}
 };
 

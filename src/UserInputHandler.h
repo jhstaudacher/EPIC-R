@@ -61,6 +61,11 @@ private:
 	bool mTestFlag;
 
 	/**
+    * Internal flag set if precoalitions are declared in weight.csv
+    */
+	bool mPrecoalitionFlag;
+
+	/**
     * Internal flag used for the input of float weights
     */
 	bool mInputFloatWeights;
@@ -88,6 +93,12 @@ private:
 	std::string mWeightsFile;
 
 	/**
+    * Structure of precoalitions
+    */
+	std::vector<std::vector<int>> mPrecoalitions;
+	//std::string mPrecoalitions;
+
+	/**
     * Method used to validate the entered output type/channel
     */
 	bool handleOutputType(char* value);
@@ -102,6 +113,11 @@ private:
     * This Method also sets the mTestFlag to true if the previous validation succeeds
     */
 	bool handleQuotaFromWeightfile(const std::string& fileName);
+
+	/**
+    * !TODO
+    */
+	bool handlePrecoalitions(const std::string& precoalitions);
 
 	/**
     * Method used to validate the entered quota
@@ -120,11 +136,12 @@ public:
      * @param index the name of the power index
      * @param weights vector of weights
      * @param quota the quota of the mGame
+     * @param precoalitions the structure of the precoalitions
      * @param outputType the output type as depicted in enum OutputType
      * @param filterNullPlayers flag to filter out null players
      * @param verbose flag to provide additional details of the computation
      */
-	UserInputHandler(const std::string& index, const std::vector<longUInt>& weights, longUInt quota, OutputType outputType, bool filterNullPlayers, bool verbose);
+	UserInputHandler(const std::string& index, const std::vector<longUInt>& weights, longUInt quota, std::vector<std::vector<int>> precoalitions, OutputType outputType, bool filterNullPlayers, bool verbose);
 
 	/**
      * Constructor B: For the input from console
@@ -145,6 +162,12 @@ public:
      * --weights \<filename.csv\>
      */
 	std::vector<longUInt>& getWeights();
+
+	/**
+     * Method to return the vector of precoalitions
+     *
+     */
+	std::vector<std::vector<int>>& getPrecoalitions();
 
 	/**
      * Method to return the quota
