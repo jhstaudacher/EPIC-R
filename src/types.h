@@ -78,7 +78,20 @@ public:
 		std::string str = stringstream.str();
 
 		return str;
+		
 	}
+	
+	/**
+	 * Calculating the factorial of a number n
+	 *
+	 * @param n The number to calculate the factorial for
+	 * @return The factorial of number n as a bigInt
+	 */
+	static bigInt fact(longUInt n) { 
+	  bigInt result(n); // initialize an arbitrary-sized integer with 'n' 
+	  while(n-- > 1) result *= n; // compute the product with every integers < n 
+	  return result; 
+	} 
 
 private:
 	static constexpr longUInt mLimbSize = GMP_LIMB_BITS / 8;

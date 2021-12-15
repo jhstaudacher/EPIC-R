@@ -1,4 +1,4 @@
-#include "index/ShapleyShubikBelow.h"
+#include "ShapleyShubikBelow.h"
 
 #include "Array.h"
 

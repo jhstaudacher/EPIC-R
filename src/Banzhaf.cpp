@@ -36,7 +36,7 @@ std::vector<epic::bigFloat> epic::index::Banzhaf::calculate() {
 			
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&tmp, n_sp[i]);
-			  	output = tmp * factor;
+			  output = tmp * factor;
 				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " <<  GMPHelper::mpf_class_to_string(output) << log::endl;
 				solution[i] = tmp / float_total_n_sp;
 			}

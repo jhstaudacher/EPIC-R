@@ -29,7 +29,7 @@ bool validateQuota(double quota);
 
 
 // [[Rcpp::export]]
-std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::NumericVector weights, double quota, bool filterNullPlayers=false, bool verbose = false, bool weightedMajorityGame = false) {
+std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::NumericVector weights, double quota, Rcpp::List precoalitions, bool filterNullPlayers = false, bool verbose = false, bool weightedMajorityGame = false) {
   
 	std::string s_index = crs(index);
 
@@ -44,7 +44,7 @@ std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Nume
 		Rcpp::stop("The weights vector needs to contain elements >= 0.");
 
 	}	
-
+	
 	if(!validateQuota(quota)){
 
 		Rcpp::stop("The quota of the game needs to be larger than 0.");
@@ -70,10 +70,34 @@ std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Nume
 	}
 	if (weightedMajorityGame) {
 	  v_quota = v_quota + 1;
+	} 
+	
+	std::vector<std::vector<int>> v_precoalitions;
+	v_precoalitions.clear();
+	
+	if (precoalitions.size() == 0) {
+	  std::vector<int> tmp;
+	  for (int i = 0; i < weights.size(); i++) {
+	    tmp.clear();
+	    tmp.push_back(i);
+	    v_precoalitions.push_back(tmp);
+	  }
+	}
+	else {
+	  Rcpp::IntegerVector tmp;
+	  std::vector<int> tmp2;
+	  for (int i = 0; i < precoalitions.size(); i++){
+	    tmp = precoalitions[i];
+	    tmp2.clear();
+	    for (int j = 0; j < tmp.size(); j++){
+	      tmp2.push_back(tmp[j] - 1);
+	    }
+	    v_precoalitions.push_back(tmp2);
+	  }
 	}
 	
 	// pass the arguments to the UserInputHandler
-	epic::io::UserInputHandler userInputHandler(s_index, v_weights, v_quota, epic::io::OutputType::R, filterNullPlayers, verbose);
+	epic::io::UserInputHandler userInputHandler(s_index, v_weights, v_quota, v_precoalitions, epic::io::OutputType::R, filterNullPlayers, verbose);
 	
 	
 	std::vector<std::string> results;

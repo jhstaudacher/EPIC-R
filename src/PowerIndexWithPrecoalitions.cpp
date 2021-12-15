@@ -1,4 +1,4 @@
-#include "index/PowerIndexWithPrecoalitions.h"
+#include "PowerIndexWithPrecoalitions.h"
 
 epic::index::PowerIndexWithPrecoalitions::PowerIndexWithPrecoalitions(Game& g)
 	: ItfPowerIndex(g) {

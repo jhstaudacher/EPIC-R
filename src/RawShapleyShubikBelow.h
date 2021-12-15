@@ -4,7 +4,7 @@
 #include "Array.h"
 #include "ItfPowerIndex.h"
 #include "ItfUpperBoundApproximation.h"
-#include "lint/ItfLargeNumberCalculator.h"
+#include "ItfLargeNumberCalculator.h"
 
 namespace epic::index {
 

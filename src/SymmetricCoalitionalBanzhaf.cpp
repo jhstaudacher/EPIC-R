@@ -1,4 +1,4 @@
-#include "index/SymmetricCoalitionalBanzhaf.h"
+#include "SymmetricCoalitionalBanzhaf.h"
 
 #include "Logging.h"
 
@@ -132,9 +132,9 @@ epic::longUInt epic::index::SymmetricCoalitionalBanzhaf::getMemoryRequirement() 
 	bigInt memory = (mGame.getWeightSum() + 1 - mGame.getQuota()) * mCalculator->getLargeNumberSize() * 2; // cc, cw
 	memory += mNbPart * c_sizeof_longUInt;																   // mPartW
 	longUInt max = std::max(mMaxPartSize, mNbPart);
-	memory += max * GMPHelper::size_of_float(bigInt::factorial(max));												// factorial
-	memory += mGame.getNumberOfPlayers() * GMPHelper::size_of_int(bigInt::factorial(mMaxPartSize));					// shapleyInternal (only very rough approximation
-	memory += mGame.getNumberOfPlayers() * GMPHelper::size_of_int(bigInt::factorial(mNbPart));						// banzhafExternal
+	memory += max * GMPHelper::size_of_float(GMPHelper::fact(max));												// factorial
+	memory += mGame.getNumberOfPlayers() * GMPHelper::size_of_int(GMPHelper::fact(mMaxPartSize));					// shapleyInternal (only very rough approximation
+	memory += mGame.getNumberOfPlayers() * GMPHelper::size_of_int(GMPHelper::fact(mNbPart));						// banzhafExternal
 	memory += (mGame.getWeightSum() + 1 - mGame.getQuota()) * mMaxPartSize * mCalculator->getLargeNumberSize() * 2; // cw2, cwi
 	memory += mMaxPartSize * c_sizeof_longUInt;																		// winternal
 

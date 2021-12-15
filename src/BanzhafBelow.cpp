@@ -1,4 +1,4 @@
-#include "index/BanzhafBelow.h"
+#include "BanzhafBelow.h"
 
 #include "Array.h"
 #include "Logging.h"
@@ -28,13 +28,15 @@ std::vector<epic::bigFloat> epic::index::BanzhafBelow::calculate() {
 
 		if (log::out.getLogLevel() <= log::info) {
 			bigInt factor = bigInt(1) << mGame.getNumberOfPlayersWithWeight0(); // additional winning coalitions due to players of weight 0
-
-			log::out << log::info << "Total number of swings: " << float_total_n_sp * factor << log::endl;
+		  bigFloat output = float_total_n_sp * factor;
+		  
+			log::out << log::info << "Total number of swings: " << GMPHelper::mpf_class_to_string(output) << log::endl;
 			log::out << log::info << "Raw Banzhaf:" << log::endl;
 
 			for (longUInt i = 0; i < mNonZeroPlayerCount; ++i) {
 				mCalculator->to_bigInt(&tmp, n_sp[i]);
-				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << tmp * factor << log::endl;
+			  output = tmp * factor;
+				log::out << "Player " << mGame.playerIndexToNumber(i) << ": " << GMPHelper::mpf_class_to_string(output) << log::endl;
 				solution[i] = tmp / float_total_n_sp;
 			}
 			for (longUInt i = mNonZeroPlayerCount; i < mGame.getNumberOfPlayers(); ++i) {

@@ -1,4 +1,4 @@
-#include "index/RawBanzhafBelow.h"
+#include "RawBanzhafBelow.h"
 
 #include <iostream>
 

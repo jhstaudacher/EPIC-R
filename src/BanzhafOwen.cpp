@@ -1,4 +1,4 @@
-#include "index/BanzhafOwen.h"
+#include "BanzhafOwen.h"
 
 #include "Logging.h"
 
