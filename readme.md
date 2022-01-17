@@ -47,9 +47,14 @@ The R package offers the function `ComputePowerIndex` which expects the followin
 ## Required parameters
 | name | type | description |
 | ------ | -------- | ----------- |
-| index | index shortcut (see Available indices) | the index to compute |
-| weights | numeric vector | the player weights for the weighted voting Game |
-| quota | numeric | the quota for the weighted voting Game |
+| index | index shortcut as String (see Available indices) | the index to compute |
+| weights or weightsfile | numeric vector or .csv file | the player weights for the weighted voting Game (*1)|
+| quota | numeric | the quota for the weighted voting Game (*2)    |
+
+
+(*1) The weights must be specified either by a numeric vector or a .csv file. The .csv file must contain one weight per line. The weights must all be integers unless you set the inputFloatWeights flag.
+
+(*2) When setting the quota to 0, the first line of the weights file will be interpreted as the quota to use. 
 
 
 ## Optional parameters
@@ -57,11 +62,18 @@ The R package offers the function `ComputePowerIndex` which expects the followin
 
 | name | type | description |
 | ------ | -------- | ----------- |
-| precoalitions | List of integer vectors | specifies the structure of the precoalitions (player numbers are from 1 to n. For example precoalitions = list(c(1,3), c(2,4), c(5)) would be a preacoalition between player 1 and 3, player 2 and 4 while player 5 is alone.) |
+| precoalitions | List of integer vectors | specifies the structure of the precoalitions (*3) |
 | verbose | boolean | adds extra output |
 | filterNullPlayers | boolean| excludes null player from the calculation (not compatible with all indices!) |
 | weightedMajorityGame | boolean | uses a weighted majority game (i.e. the weight sum must be greater than the quota for a coalition to be considered a winning coalition) for the underlying calculations |
 | useGMPTypes | boolean | return the results as GNU MPFR types|
+| inputFloatWeights | boolean | reads the weights from the weightfile as floating point numbers|
+
+(*3) When the weights are specified using a weightsfile the structure of the precoalitions will be generated from this file and the precoalitions specified using the parameter will be ignored. The weightsfile has to be written accordingly. If defined in the weightsfile, the players in the same precoalition should all be in the same line and seperated by ",". A new line is a new precoalition. 
+
+When using the precoalitions parameter the precoalitions are structured using a list of integer vectors. Player numbers are from 1 to n. For example precoalitions = list(c(1,3), c(2,4), c(5)) would be a preacoalition between player 1 and 3, player 2 and 4 while player 5 is alone.
+
+
 
 
 ## Available indices
@@ -120,7 +132,7 @@ For a simple example we want to calculate the Banzhaf index for a simple 5-playe
 
 `library(EfficientPowerIndices)`
 
-`ComputePowerIndex(index = "BZ", weights = c(9, 5, 3, 1, 1), quota = 11, verbose = TRUE)`
+`ComputePowerIndex(index = "BZ", quota = 11, weights = c(9, 5, 3, 1, 1), verbose = TRUE)`
 
 By setting the verbose parameter to `TRUE` we get extra output like the raw Banzhaf values and the total number of swings (sum over the raw Banzhaf values).
 

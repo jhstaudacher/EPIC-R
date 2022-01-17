@@ -5,26 +5,33 @@
 
 using namespace Rcpp;
 
+#ifdef RCPP_USE_GLOBAL_ROSTREAM
+Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
+Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
+#endif
+
 // ComputePowerIndexAdapter
-std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::NumericVector weights, double quota, Rcpp::List precoalitions, bool filterNullPlayers, bool verbose, bool weightedMajorityGame);
-RcppExport SEXP _EfficientPowerIndices_ComputePowerIndexAdapter(SEXP indexSEXP, SEXP weightsSEXP, SEXP quotaSEXP, SEXP precoalitionsSEXP, SEXP filterNullPlayersSEXP, SEXP verboseSEXP, SEXP weightedMajorityGameSEXP) {
+std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Nullable<Rcpp::NumericVector> weights, double quota, Rcpp::String weightsfile, Rcpp::Nullable<Rcpp::List> precoalitions, bool filterNullPlayers, bool verbose, bool weightedMajorityGame, bool inputFloatWeights);
+RcppExport SEXP _EfficientPowerIndices_ComputePowerIndexAdapter(SEXP indexSEXP, SEXP weightsSEXP, SEXP quotaSEXP, SEXP weightsfileSEXP, SEXP precoalitionsSEXP, SEXP filterNullPlayersSEXP, SEXP verboseSEXP, SEXP weightedMajorityGameSEXP, SEXP inputFloatWeightsSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< Rcpp::String >::type index(indexSEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type weights(weightsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::NumericVector> >::type weights(weightsSEXP);
     Rcpp::traits::input_parameter< double >::type quota(quotaSEXP);
-    Rcpp::traits::input_parameter< Rcpp::List >::type precoalitions(precoalitionsSEXP);
+    Rcpp::traits::input_parameter< Rcpp::String >::type weightsfile(weightsfileSEXP);
+    Rcpp::traits::input_parameter< Rcpp::Nullable<Rcpp::List> >::type precoalitions(precoalitionsSEXP);
     Rcpp::traits::input_parameter< bool >::type filterNullPlayers(filterNullPlayersSEXP);
     Rcpp::traits::input_parameter< bool >::type verbose(verboseSEXP);
     Rcpp::traits::input_parameter< bool >::type weightedMajorityGame(weightedMajorityGameSEXP);
-    rcpp_result_gen = Rcpp::wrap(ComputePowerIndexAdapter(index, weights, quota, precoalitions, filterNullPlayers, verbose, weightedMajorityGame));
+    Rcpp::traits::input_parameter< bool >::type inputFloatWeights(inputFloatWeightsSEXP);
+    rcpp_result_gen = Rcpp::wrap(ComputePowerIndexAdapter(index, weights, quota, weightsfile, precoalitions, filterNullPlayers, verbose, weightedMajorityGame, inputFloatWeights));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_EfficientPowerIndices_ComputePowerIndexAdapter", (DL_FUNC) &_EfficientPowerIndices_ComputePowerIndexAdapter, 7},
+    {"_EfficientPowerIndices_ComputePowerIndexAdapter", (DL_FUNC) &_EfficientPowerIndices_ComputePowerIndexAdapter, 9},
     {NULL, NULL, 0}
 };
 

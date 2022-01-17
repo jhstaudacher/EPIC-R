@@ -1,8 +1,8 @@
 library(Rmpfr)
 
 #' @export
-ComputePowerIndex <- function(index, weights, quota, precoalitions = NULL, filterNullPlayers = FALSE, verbose = FALSE, weightedMajorityGame = FALSE, useGMPTypes = FALSE) {
-  string_results = ComputePowerIndexAdapter(index, weights, quota, precoalitions, filterNullPlayers, verbose, weightedMajorityGame)
+ComputePowerIndex <- function(index, quota, weights = NULL, weightsfile = "", precoalitions = NULL, filterNullPlayers = FALSE, verbose = FALSE, weightedMajorityGame = FALSE, useGMPTypes = FALSE, inputFloatWeights = FALSE) {
+  string_results = ComputePowerIndexAdapter(index, weights, quota, weightsfile, precoalitions, filterNullPlayers, verbose, weightedMajorityGame, inputFloatWeights)
   
   if(!useGMPTypes) {
     double_results = as.double(string_results)
