@@ -15,6 +15,28 @@ enum Operation {
 };
 
 /**
+ * A struct holding the parameters to decide what calculator to use
+ */
+struct CalculatorConfig {
+	/**
+	 * Constructor simply initializes the internal variables wth the passed values
+	 *
+	 * @param max_value The maximum value that should be representable using the LargeNumber (via the calculator object)
+	 * @param op The most complex operation that needs to get applied by the calculator object
+	 * @param rep Defining the int representation and therefore, which calculator needed (if not equal DEFAULT)
+	 */
+	CalculatorConfig(bigInt max_value, Operation op, IntRepresentation rep) {
+		maxValue = max_value;
+		this->op = op;
+		intRep = rep;
+	};
+
+	bigInt maxValue;
+	Operation op;
+	IntRepresentation intRep = DEFAULT;
+};
+
+/**
  * Interface class for the Chinese Remainder Theorem
  * 
  * It offers operations to the set of numbers according to the Chinese Remainder Theorem:
@@ -176,15 +198,12 @@ public:
 	virtual void to_bigInt(bigInt* dest, const LargeNumber& value) = 0;
 
 	/**
-	 * Allocating the LargeNumber objects of a C-style array.
+	 * Getting the number represented by val as string.
 	 *
-	 * This is the same functionality as calling the alloc_largeNumber() method for each array entry.
+	 * @param val The value that should get converted to string
 	 *
-	 * @note Since this method allocates all needed memory at once, it needs less memory (and probably time) than allocating each entry separately as each dynamic memory allocation "may supply unspecified overhead [...]" (https://en.cppreference.com/w/cpp/language/new).
-	 * @note To free the allocated memory use the free_largeNumberArray() method!
-	 *
-	 * @param array The C-style Array containing the LargeNumber objects.
-	 * @param number_of_elements The number of elements contained in the array.
+	 * @return A string representation of the number stored in val.
+	 * @warning This method is not designed to be efficient (neither in terms of space nor in terms of time). It is intended to simplify the output for debug purposes.
 	 */
 	virtual void alloc_largeNumberArray(LargeNumber* array, longUInt number_of_elements) = 0;
 
@@ -246,22 +265,22 @@ public:
 	/**
 	 * A Factory-Method allocating an object of type ItfLargeNumberCalculator
 	 *
-	 * Depending on the parameters the correct ChineseRemainder object gets allocated.
+	 * Depending on the required configuration the correct object gets created.
 	 *
-	 * @param max_value The largest values that needs to get represented using the Chinese Remainder Theorem.
-	 * @param op The most complex mathematical operation that needs to be applied to the values.
-	 * @param int_representation Explicitly set the kind of integer representation. If set to DEFAULT the best version depending on max_value gets chosen.
+	 * @param config The configuration specifying the requirements on the ItfLargeNumberCalculator object
 	 *
-	 * @return A new allocated object of type ItfLargeNumberCalculator able to represent at least max_value and calculate the op operations. This object should be deleted using delete_calculator() function.
+	 * @return A new allocated object of type ItfLargeNumberCalculator is able to represent at least config.maxValue and calculate the config.op operations.
+	 *
+	 * @note The returned object should be deleted using delete_calculator() function.
 	 */
-	static ItfLargeNumberCalculator* new_calculator(const bigInt& max_value, Operation op, IntRepresentation int_representation = DEFAULT);
+	static ItfLargeNumberCalculator* new_calculator(const CalculatorConfig& config);
 
 	/**
 	 * A Factory-Method deleting an object of type ItfLargeNumberCalculator
 	 *
-	 * @param remainder The object to delete. This should have previously been allocated using the new_calculator() function.
+	 * @param calculator The object to delete. This should have previously been allocated using the new_calculator() function.
 	 */
-	static void delete_calculator(ItfLargeNumberCalculator* remainder);
+	static void delete_calculator(ItfLargeNumberCalculator* calculator);
 };
 
 } /* namespace epic::lint */

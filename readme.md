@@ -98,6 +98,7 @@ When using the precoalitions parameter the precoalitions are structured using a 
 | `N` | Nevison (based on the Dubey-Shapley identity)|
 | `NPH` | Nevison (based on Raw Public Help Theta) |
 | `O` | Owen |
+| `OPGI` | Owen Extended PGI |
 | `PG` | Public Good |
 | `PHT` | Public Help Theta (based on the Dubey-Shapley identity) |
 | `PHTPH` | Public Help Theta (based on Raw Public Help Theta) |
@@ -121,8 +122,13 @@ When using the precoalitions parameter the precoalitions are structured using a 
 | `RSHB` | Raw Shapley Shubik from below |
 | `SH` | Shapley Shubik |
 | `SHB` | Shapley Shubik from below |
+| `SPGI` | Solidarity Public Good Index |
 | `T` | Tijs |
-| `W` | Number of winning coalitions |
+| `TPGI1` | Threat Public Good Index 1 |
+| `TPGI2` | Threat Public Good Index 2 |
+| `TPGI3` | Threat Public Good Index 3 |
+| `UPGI` | Union Public Good Index |
+| `W` | Number of winning coalitions|
 | `WM` | Number of minimal winning coalitions |
 | `WS` | Number of minimal winning coalitions of smallest cardinality |
 

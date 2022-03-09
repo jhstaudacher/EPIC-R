@@ -5,9 +5,13 @@
 #include "SystemControlUnit.h"
 #include "IndexFactory.h"
 #include "DataOutput.h"
+
+#include "types.h"
+
+#include <string>
 #include <vector>
 #include <cmath>
-#include "types.h"
+
 
 
 // function to convert Rcpp string to c
@@ -88,6 +92,7 @@ std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Null
 	    v_quota = v_weights.back();	
 	    v_weights.pop_back();	
 	  }
+	  
 	  if (precoalitions.isNotNull()) {
 	    Rcpp::IntegerVector tmp;
 	    std::vector<int> tmp2;
@@ -106,12 +111,17 @@ std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Null
 	    }
 	  }
 	  else {
-	    std::vector<int> tmp;
-	    for (int i = 0; i < v_weights.size(); i++) {
-	      tmp.clear();
-	      tmp.push_back(i);
-	      v_precoalitions.push_back(tmp);
+	    //check if precoalitions are available for precoalition indices
+	    if ((index == "SCB") || (index == "BO") || (index == "O")) {
+	        Rcpp::stop("Missing argument for precoalition games: precoalitions list needs to be specified.");
 	    }
+	    
+	    // std::vector<int> tmp;
+	    // for (int i = 0; i < v_weights.size(); i++) {
+	    //   tmp.clear();
+	    //   tmp.push_back(i);
+	    //   v_precoalitions.push_back(tmp);
+	    // }
 	    
 	  }
 	  
@@ -124,9 +134,8 @@ std::vector<std::string> ComputePowerIndexAdapter(Rcpp::String index, Rcpp::Null
 	    // read weights from csv file
 	    std::string s_weightsfile = crs(weightsfile);
 	    handleWeightsFromFile(s_weightsfile, v_weights, v_quota, quota, v_precoalitions, inputFloatWeights, quotaFromFile);
-	      
-	    }
-		}
+	 	 } 
+	}
 	
 	if (weightedMajorityGame) {
 	  v_quota = v_quota + 1;
